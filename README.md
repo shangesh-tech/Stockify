@@ -85,7 +85,7 @@ Stockify revolutionizes long-term wealth building by combining **AI-driven insig
 Stockify leverages **comprehensive data sources** for accurate analysis and predictions:
 
 - **Financial Market APIs**: NSE/BSE, TradingView,Yahoo Finance.
-- **Stock Fundamentals & Technicals**: Calculte manually based on Yahoo Finance Price fluctuation.
+- **Stock Fundamentals & Technicals**: Calculate manually based on Yahoo Finance Price fluctuation.
 
 ---
 

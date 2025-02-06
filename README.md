@@ -7,6 +7,12 @@
 
 ---
 
+## 🚀 **Motive**
+
+Stockify is here to transform investing with AI. Let’s build long-term wealth together! 🚀
+
+---
+
 ## 🚀 **About the Project**
 
 Stockify revolutionizes long-term wealth building by combining **AI-driven insights**, **advanced analytics**, and **portfolio recommendations**. Unlike traditional tools that focus on short-term trading, Stockify emphasizes **long-term success** through:
@@ -94,7 +100,3 @@ Stockify leverages **comprehensive data sources** for accurate analysis and pred
 This project is licensed under the MIT License. See [LICENSE](/LICENSE) for details.
 
 ---
-
-## 🚀 **Motive**
-
-Stockify is here to transform investing with AI. Let’s build long-term wealth together! 🚀

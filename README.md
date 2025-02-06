@@ -38,7 +38,7 @@ Stockify is revolutionizes the way people build long-term wealth by blending **A
 - **Technical Analysis**: Support & resistance levels, moving averages, and trend indicators.
 
 
-### ⚙️ **AI-Driven Alerts for Watchlist Stocks**:
+### ⚙️ **AI-Driven Weekly Report for Watchlist Stocks**:
 - Ensures new opportunities for wealth creation.
 
 ---
@@ -79,13 +79,11 @@ Stockify is revolutionizes the way people build long-term wealth by blending **A
 5. **AI Recommends Action**:
    - Buy, Sell, or Hold based on combined analysis.
 
-### 3️⃣ **AI Alerts for Watchlist Stocks**
+### 3️⃣ **AI-Driven Weekly Report for Watchlist Stocks**
 1. **User adds stocks to their watchlist.**
 2. **AI Monitors Watchlist**:
    - Tracks price movements, news sentiment, and technical indicators.
-3. **Real-Time Alerts**:
-   - AI sends email notifications for significant changes (e.g., price drops, breakout opportunities).
-4. **Actionable Insights**:
+3. **Actionable Insights**:
    - Provides recommendations (Buy, Sell, or Hold) based on real-time analysis.
 
 ---

@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'https://stockify-pink.vercel.app',
   credentials: true,
 }));
 

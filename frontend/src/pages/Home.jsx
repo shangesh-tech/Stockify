@@ -11,7 +11,7 @@ const Home = () => {
       <Header />
       <TickerTape
         colorTheme="light"
-        largeChartUrl="http://localhost:5173/analysis"
+        largeChartUrl="https://stockify-pink.vercel.app/analysis"
         symbols={[
           { proName: "RELIANCE", title: "Reliance Industries" },
           { proName: "WIPRO", title: "WIPRO LTD" },

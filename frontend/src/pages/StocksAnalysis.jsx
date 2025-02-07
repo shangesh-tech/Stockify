@@ -29,7 +29,7 @@ const StocksAnalysis = () => {
   const getAIAnalysis = async () => {
     setIsAnalyzing(true);
     try {
-      const response = await axios.post("http://127.0.0.1:8000/get-stock-analysis", {
+      const response = await axios.post("https://stockify-fastapi.onrender.com/get-stock-analysis", {
         symbol: `${symbol}.NS`,
         time_period: timePeriod
       });

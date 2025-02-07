@@ -26,7 +26,7 @@ const Layout = ({ children }) => {
     const fetchUserDetails = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3500/api/v1/user/me",
+          "https://stockify-backend-3mmq.onrender.com/api/v1/user/me",
           {
             withCredentials: true,
           }

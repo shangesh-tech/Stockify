@@ -9,7 +9,7 @@ const axios = require("axios");
  */
 const fetchPortfolioSummaryFromPython = async (investmentDetails) => {
   try {
-    const response = await axios.post("http://127.0.0.1:8000/get-investment-portfolio", investmentDetails);
+    const response = await axios.post("https://stockify-fastapi.onrender.com/get-investment-portfolio", investmentDetails);
     return response.data; // Expected to return { portfolio_allocation, portfolio_summary }
   } catch (error) {
     console.error("Error fetching portfolio summary from Python server:", error.message);

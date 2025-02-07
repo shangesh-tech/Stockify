@@ -4,7 +4,7 @@ import axios from 'axios';
 // Configure axios defaults for credentials
 axios.defaults.withCredentials = true;
 
-const BASE_URL = 'http://localhost:3500/api/v1/portfolio';
+const BASE_URL = 'https://stockify-backend-3mmq.onrender.com/api/v1/portfolio';
 
 const initialState = {
   portfolios: [],

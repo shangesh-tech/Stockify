@@ -9,7 +9,7 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        const response = await axios.get("http://localhost:3500/api/v1/user/check-auth", { withCredentials: true });
+        const response = await axios.get("https://stockify-backend-3mmq.onrender.com/api/v1/user/check-auth", { withCredentials: true });
         if (response.data.success) {
           setIsAuthenticated(true);
         } else {

@@ -18,7 +18,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:3500/api/v1/user/login', {
+      const response = await axios.post('https://stockify-backend-3mmq.onrender.com/api/v1/user/login', {
         email,
         password,
       }, {

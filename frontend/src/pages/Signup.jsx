@@ -50,7 +50,7 @@ const SignUp = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:3500/api/v1/user/register', {
+      const response = await axios.post('https://stockify-backend-3mmq.onrender.com/api/v1/user/register', {
         name,
         email,
         gender,

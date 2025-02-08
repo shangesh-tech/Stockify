@@ -97,9 +97,9 @@ const Layout = ({ children }) => {
             <li className="flex items-center space-x-3 text-gray-900 font-semibold hover:scale-105">
               <Link
                 to="https://www.tickertape.in/market-mood-index"
-                className="flex justify-center items-center gap-2"
+                className="flex justify-center items-center gap-1"
               >
-                <MdMood size={20}/>
+                <MdMood size={23}/>
                 <span>Fear/Greed Index</span>
               </Link>
             </li>

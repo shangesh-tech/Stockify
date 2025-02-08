@@ -59,7 +59,7 @@ const Layout = ({ children }) => {
         </h1>
         <nav>
           <ul className="space-y-4">
-            <li className="flex items-center space-x-3 text-gray-900 font-semibold">
+            <li className="flex items-center space-x-3 text-gray-900 font-semibold hover:scale-105">
               <Link
                 to="/dashboard"
                 className="flex justify-center items-center gap-2"
@@ -68,7 +68,7 @@ const Layout = ({ children }) => {
                 <span>Dashboard</span>
               </Link>
             </li>
-            <li className="flex items-center space-x-3 text-gray-500">
+            <li className="flex items-center space-x-3 text-gray-900 font-semibold hover:scale-105">
               <Link
                 to="/portfolio"
                 className="flex justify-center items-center gap-2"
@@ -77,7 +77,7 @@ const Layout = ({ children }) => {
                 <span>Portfolio</span>
               </Link>
             </li>
-            <li className="flex items-center space-x-3 text-gray-500">
+            <li className="flex items-center space-x-3 text-gray-900 font-semibold hover:scale-105">
               <Link
                 to="/analysis"
                 className="flex justify-center items-center gap-2"
@@ -86,7 +86,7 @@ const Layout = ({ children }) => {
                 <span>Market Analysis</span>
               </Link>
             </li>
-            <li className="flex items-center space-x-3 text-gray-500">
+            <li className="flex items-center space-x-3 text-gray-900 font-semibold hover:scale-105">
               <Link
                 to="https://finance-analyzers.streamlit.app/"
                 className="flex justify-center items-center gap-2"
@@ -95,7 +95,7 @@ const Layout = ({ children }) => {
                 <span>Finance Analyzer</span>
               </Link>
             </li>
-            <li className="flex items-center space-x-3 text-gray-500">
+            <li className="flex items-center space-x-3 text-gray-900 font-semibold hover:scale-105">
               <Link
                 to="https://zerodha.com/varsity/"
                 className="flex justify-center items-center gap-2"
@@ -118,11 +118,11 @@ const Layout = ({ children }) => {
         </div>
 
         <div className="mt-6">
-          <Link to={"http://localhost:3500/api/v1/user/logout"} className="flex items-center space-x-2 text-gray-500">
+          <Link to={"http://localhost:3500/api/v1/user/logout"} className="flex items-center space-x-2 text-gray-500" classname="text-red-600 hover:scale-105">
             <FaSignOutAlt />
             <span>Logout</span>
           </Link>
-          <button className="flex items-center space-x-2 text-gray-500 mt-3">
+          <button className="flex items-center space-x-2 text-gray-500 mt-3 hover:scale-105">
             <FaQuestionCircle />
             <span>Help & Support</span>
           </button>

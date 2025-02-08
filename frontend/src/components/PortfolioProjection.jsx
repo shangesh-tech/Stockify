@@ -16,23 +16,22 @@ const PortfolioProjection = ({ portfolioData = {}, currentBalance = 0 }) => {
   };
 
   const calculateLumpsumValue = (principal, rate, years) => {
+    // Simple compound interest for lumpsum: P(1 + r)^t
     return Math.round(principal * Math.pow(1 + rate, years));
   };
 
-const calculateSIPValue = (principal, rate, years) => {
-  let totalValue = 0;
-  const monthlyRate = rate / 12;
-  
-  // Use principal as the monthly contribution
-  for (let i = 1; i <= years * 12; i++) {
-    // Add the principal amount each month
-    totalValue += principal;
-    // Let the entire amount grow for this month
-    totalValue = totalValue * (1 + monthlyRate);
-  }
-  
-  return Math.round(totalValue);
-};
+  const calculateSIPValue = (principal, rate, years) => {
+    let totalValue = 0;
+    const monthlyRate = rate / 12;
+    
+    // For SIP: Monthly investment with monthly compounding
+    for (let i = 1; i <= years * 12; i++) {
+      totalValue += principal; // Monthly investment
+      totalValue *= (1 + monthlyRate); // Monthly growth
+    }
+    
+    return Math.round(totalValue);
+  };
 
   const calculateCAGR = (initialValue, finalValue, years) => {
     if (!initialValue || !finalValue || !years) return "0.00";
@@ -49,39 +48,58 @@ const calculateSIPValue = (principal, rate, years) => {
   };
 
   const projectionData = useMemo(() => {
-  const riskLevel = portfolioData?.portfolio_allocation?.risk || 'low';
-  const returnRate = getRiskReturnRate(riskLevel);
-  const isLumpsum = portfolioData?.investment_type === 'lumpsum';
-  const years = Array.from({ length: 21 }, (_, i) => i);
-  
-  return years.map(year => {
-    const futureValue = isLumpsum 
-      ? calculateLumpsumValue(currentBalance, returnRate, year)
-      : calculateSIPValue(currentBalance, returnRate, year); 
+    const riskLevel = portfolioData?.portfolio_allocation?.risk || 'low';
+    const returnRate = getRiskReturnRate(riskLevel);
+    const isLumpsum = portfolioData?.investment_type === 'lumpsum';
+    const years = Array.from({ length: 21 }, (_, i) => i);
+    
+    return years.map(year => {
+      // Calculate future value based on investment type
+      const futureValue = isLumpsum 
+        ? calculateLumpsumValue(currentBalance, returnRate, year)
+        : calculateSIPValue(currentBalance, returnRate, year);
 
-    const totalInvested = isLumpsum 
-      ? currentBalance 
-      : currentBalance * 12 * year;
-    const cagr = year > 0 ? calculateCAGR(currentBalance * 12, futureValue, year) : "0.00";
+      // Calculate total invested amount based on investment type
+      const totalInvested = isLumpsum 
+        ? currentBalance // For lumpsum, it's just the initial amount
+        : currentBalance * 12 * year; // For SIP, it's monthly amount * 12 * years
 
-    return {
-      year,
-      value: futureValue,
-      totalInvested,
-      cagr,
-      formatted: formatCurrency(futureValue),
-      formattedInvested: formatCurrency(totalInvested)
-    };
-  });
-}, [currentBalance, portfolioData]);
+      // Calculate CAGR differently for SIP and Lumpsum
+      const cagr = year > 0 
+        ? calculateCAGR(
+            isLumpsum ? currentBalance : (currentBalance * 12), // Initial value
+            futureValue,
+            year
+          ) 
+        : "0.00";
+
+      return {
+        year,
+        value: futureValue,
+        totalInvested,
+        cagr,
+        formatted: formatCurrency(futureValue),
+        formattedInvested: formatCurrency(totalInvested)
+      };
+    });
+  }, [currentBalance, portfolioData]);
 
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
+      const isLumpsum = portfolioData?.investment_type === 'lumpsum';
+      
       return (
         <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200">
           <p className="font-semibold text-gray-800">Year {label}</p>
-          <p className="text-gray-600">Initial Amount: {formatCurrency(currentBalance)}</p>
+          {isLumpsum ? (
+            <p className="text-gray-600">Initial Investment: {formatCurrency(currentBalance)}</p>
+          ) : (
+            <>
+              <p className="text-gray-600">Monthly SIP: {formatCurrency(currentBalance)}</p>
+              <p className="text-gray-600">Years Invested: {label}</p>
+            </>
+          )}
           <p className="text-gray-600">Total Invested: {data.formattedInvested}</p>
           <p className="text-gray-600">Portfolio Value: {data.formatted}</p>
           <p className="text-gray-600">CAGR: {data.cagr}%</p>
@@ -95,7 +113,6 @@ const calculateSIPValue = (principal, rate, years) => {
   const riskLevel = portfolioData?.portfolio_allocation?.risk || 'low';
   const returnRate = getRiskReturnRate(riskLevel);
   const isLumpsum = portfolioData?.investment_type === 'lumpsum';
-  const monthlyContribution = portfolioData?.portfolio_allocation?.monthly_contribution || 0;
 
   return (
     <div className="space-y-6">
@@ -103,11 +120,10 @@ const calculateSIPValue = (principal, rate, years) => {
         <div>
           <h3 className="text-lg font-semibold mb-2">Investment Summary</h3>
           <p className="text-gray-600">Investment Type: {isLumpsum ? 'Lumpsum' : 'SIP'}</p>
-          <p className="text-gray-600">Initial Amount: {formatCurrency(currentBalance)}</p>
-          {!isLumpsum && (
-            <p className="text-gray-600">
-              Monthly SIP: {formatCurrency(currentBalance)}
-            </p>
+          {isLumpsum ? (
+            <p className="text-gray-600">Initial Investment: {formatCurrency(currentBalance)}</p>
+          ) : (
+            <p className="text-gray-600">Monthly SIP Amount: {formatCurrency(currentBalance)}</p>
           )}
           <p className="text-gray-600">
             Expected Return: {(returnRate * 100).toFixed(1)}% ({riskLevel} risk)
@@ -161,7 +177,11 @@ const calculateSIPValue = (principal, rate, years) => {
             >
               <p className="text-sm text-gray-600 font-medium">After {year} years</p>
               <div className="space-y-2">
-                <p className="text-sm text-gray-600">Initial: {formatCurrency(currentBalance)}</p>
+                {isLumpsum ? (
+                  <p className="text-sm text-gray-600">Initial: {formatCurrency(currentBalance)}</p>
+                ) : (
+                  <p className="text-sm text-gray-600">Monthly SIP: {formatCurrency(currentBalance)}</p>
+                )}
                 <p className="text-sm text-gray-600">Total Invested: {projection.formattedInvested}</p>
                 <p className="text-sm text-gray-600">→</p>
                 <p className="text-lg font-semibold text-gray-900">{projection.formatted}</p>

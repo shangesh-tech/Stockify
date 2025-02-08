@@ -106,7 +106,7 @@ const calculateSIPValue = (principal, rate, years) => {
           <p className="text-gray-600">Initial Amount: {formatCurrency(currentBalance)}</p>
           {!isLumpsum && (
             <p className="text-gray-600">
-              Monthly SIP: {formatCurrency(monthlyContribution)}
+              Monthly SIP: {formatCurrency(currentBalance)}
             </p>
           )}
           <p className="text-gray-600">

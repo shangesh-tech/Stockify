@@ -100,7 +100,7 @@ const Layout = ({ children }) => {
                 className="flex justify-center items-center gap-1"
               >
                 <MdMood size={23}/>
-                <span>Fear/Greed Index</span>
+                <span classname="mr-2">Fear/Greed Index</span>
               </Link>
             </li>
             <li className="flex items-center space-x-3 text-gray-900 font-semibold hover:scale-105">

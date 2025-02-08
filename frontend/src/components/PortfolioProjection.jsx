@@ -6,7 +6,7 @@ const PortfolioProjection = ({ portfolioData, currentBalance }) => {
     switch (risk.toLowerCase()) {
       case 'low':
         return 0.11; // 11% average return
-      case 'medium':
+      case 'conservative':
         return 0.135; // 13.5% average return
       case 'high':
         return 0.165; // 16.5% average return

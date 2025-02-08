@@ -89,7 +89,6 @@ const PortfolioProjection = ({ portfolioData, currentBalance }) => {
             <Line
               type="monotone"
               dataKey="value"
-              name="Portfolio Value"
               stroke="#2563eb"
               strokeWidth={2}
               dot={false}

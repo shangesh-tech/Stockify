@@ -17,7 +17,8 @@ import {
   EditPortfolioModal,
 } from "../components/PortfolioStepper";
 import PortfolioAllocationChart from "../components/Assest_chart";
-import PortfolioProjection from "../components/PortfolioProjection";
+import SIPProjection from "../components/SIPProjection";
+import LumpsumProjection from "../components/LumpsumProjection";
 
 const Portfolio = () => {
   const dispatch = useDispatch();
@@ -263,10 +264,17 @@ const Portfolio = () => {
               <h3 className="text-lg font-semibold mb-2">
                 Future Portfolio Projections
               </h3>
-              <PortfolioProjection
-                portfolioData={selectedPortfolio?.portfolio_data}
-                currentBalance={Number(selectedPortfolio?.portfolio_balance)}
-              />
+              {selectedPortfolio?.investment_type?.toLowerCase() === 'sip' ? (
+                <SIPProjection
+                  portfolioData={selectedPortfolio}
+                  currentBalance={Number(selectedPortfolio?.portfolio_balance)}
+                />
+              ) : (
+                <LumpsumProjection
+                  portfolioData={selectedPortfolio}
+                  currentBalance={Number(selectedPortfolio?.portfolio_balance)}
+                />
+              )}
             </div>
           </div>
         </div>

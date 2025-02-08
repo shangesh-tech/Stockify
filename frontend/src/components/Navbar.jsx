@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom"; 
 
 const Navbar = () => {
-  // State to control the mobile navigation
+  
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Toggle mobile menu visibility
+ 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
   };

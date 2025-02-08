@@ -1,4 +1,3 @@
-// src/components/Layout.jsx
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -14,14 +13,14 @@ import {
   FaBars,
   FaTimes,
 } from "react-icons/fa";
-import { TickerTape } from "react-ts-tradingview-widgets";
+import { MdMood } from "react-icons/md";
 import StockSearch from "./StockSearch";
 
 const Layout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [user, setUser] = useState({ name: "Loading...", email: "Loading..." });
 
-  // Fetch user details from the backend
+ 
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
@@ -31,7 +30,7 @@ const Layout = ({ children }) => {
             withCredentials: true,
           }
         );
-        console.log(response.data); // Check if you are getting JSON data
+        console.log(response.data); 
         setUser(response.data.user);
       } catch (error) {
         console.error("Error fetching user details:", error);
@@ -97,6 +96,15 @@ const Layout = ({ children }) => {
             </li>
             <li className="flex items-center space-x-3 text-gray-900 font-semibold hover:scale-105">
               <Link
+                to="https://www.tickertape.in/market-mood-index"
+                className="flex justify-center items-center gap-2"
+              >
+                <MdMood />
+                <span>Fear/Greed Index</span>
+              </Link>
+            </li>
+            <li className="flex items-center space-x-3 text-gray-900 font-semibold hover:scale-105">
+              <Link
                 to="https://zerodha.com/varsity/"
                 className="flex justify-center items-center gap-2"
               >
@@ -129,7 +137,7 @@ const Layout = ({ children }) => {
         </div>
       </aside>
 
-      {/* Backdrop (overlay) */}
+      
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black opacity-50 z-40 lg:hidden"

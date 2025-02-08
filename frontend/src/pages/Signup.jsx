@@ -1,71 +1,81 @@
-import React, { useState } from 'react';
-import { FaFacebookF, FaGoogle, FaApple } from 'react-icons/fa'; 
-import { Link, useNavigate } from 'react-router-dom'; 
-import axios from 'axios';
-import { toast } from 'react-toastify';  // Importing react-toastify
-import img from '../assets/signup.png';
+import React, { useState } from "react";
+import { FaFacebookF, FaGoogle, FaApple } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+import img from "../assets/signup.png";
 
 const SignUp = () => {
-  const navigate = useNavigate();  // Use navigate for redirection
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [gender, setGender] = useState('');
-  const [password, setPassword] = useState('');
-  const [age, setAge] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [gender, setGender] = useState("");
+  const [password, setPassword] = useState("");
+  const [age, setAge] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
-  // Handle form submission
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    // Check if passwords match
+    
     if (password !== confirmPassword) {
       setLoading(false);
-      setError('Passwords do not match');
-      toast.error('Passwords do not match');
+      setError("Passwords do not match");
+      toast.error("Passwords do not match");
       return;
     }
 
-    // Validate required fields
+    
     if (!name || !email || !gender || !password || !age) {
       setLoading(false);
-      setError('Please add all fields');
-      toast.error('Please add all fields');
+      setError("Please add all fields");
+      toast.error("Please add all fields");
       return;
     }
 
-    // Check if email is valid
+    
     if (
-      !email.includes('@gmail.com') &&
-      !email.includes('@yahoo.com') &&
-      !email.includes('@outlook.com')
+      !email.includes("@gmail.com") &&
+      !email.includes("@yahoo.com") &&
+      !email.includes("@outlook.com")
     ) {
       setLoading(false);
-      setError('Please enter a valid email address');
-      toast.error('Please enter a valid email address');
+      setError("Please enter a valid email address");
+      toast.error("Please enter a valid email address");
       return;
     }
 
     try {
-      const response = await axios.post('https://stockify-backend-3mmq.onrender.com/api/v1/user/register', {
-        name,
-        email,
-        gender,
-        password,
-        age,
-      });
+      const response = await axios.post(
+        "https://stockify-backend-3mmq.onrender.com/api/v1/user/register",
+        {
+          name,
+          email,
+          gender,
+          password,
+          age,
+        }
+      );
 
-      toast.success('Registration successful! Redirecting to login...');
-      console.log('Registration successful:', response.data);
+      toast.success("Registration successful! Redirecting to login...");
+      console.log("Registration successful:", response.data);
       setLoading(false);
-      navigate('/login');
+      navigate("/login");
     } catch (err) {
-      console.error('Registration failed:', err.response ? err.response.data : err.message);
+      console.error(
+        "Registration failed:",
+        err.response ? err.response.data : err.message
+      );
       setLoading(false);
-      toast.error(err.response ? err.response.data.message : 'An error occurred. Please try again.');
+      toast.error(
+        err.response
+          ? err.response.data.message
+          : "An error occurred. Please try again."
+      );
     }
   };
 
@@ -75,11 +85,18 @@ const SignUp = () => {
         {/* Left Side - Form */}
         <div className="w-full md:w-1/2 pr-8">
           <h2 className="text-3xl font-bold text-black">Stockify</h2>
-          <h3 className="mt-4 text-xl text-gray-600">Let’s get you all set up so you can access your personal account</h3>
+          <h3 className="mt-4 text-xl text-gray-600">
+            Let’s get you all set up so you can access your personal account
+          </h3>
 
           <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
             <div>
-              <label className="block text-sm font-medium text-gray-600" htmlFor="name">Full Name</label>
+              <label
+                className="block text-sm font-medium text-gray-600"
+                htmlFor="name"
+              >
+                Full Name
+              </label>
               <input
                 id="name"
                 type="text"
@@ -92,7 +109,12 @@ const SignUp = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-600" htmlFor="email">Email</label>
+              <label
+                className="block text-sm font-medium text-gray-600"
+                htmlFor="email"
+              >
+                Email
+              </label>
               <input
                 id="email"
                 type="email"
@@ -105,7 +127,12 @@ const SignUp = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-600" htmlFor="gender">Gender</label>
+              <label
+                className="block text-sm font-medium text-gray-600"
+                htmlFor="gender"
+              >
+                Gender
+              </label>
               <select
                 id="gender"
                 className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -121,12 +148,17 @@ const SignUp = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-600" htmlFor="password">Password</label>
+              <label
+                className="block text-sm font-medium text-gray-600"
+                htmlFor="password"
+              >
+                Password
+              </label>
               <input
                 id="password"
                 type="password"
                 className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="********"
+                placeholder="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -134,12 +166,17 @@ const SignUp = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-600" htmlFor="confirm-password">Confirm Password</label>
+              <label
+                className="block text-sm font-medium text-gray-600"
+                htmlFor="confirm-password"
+              >
+                Confirm Password
+              </label>
               <input
                 id="confirm-password"
                 type="password"
                 className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="********"
+                placeholder="confirm password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
@@ -147,7 +184,12 @@ const SignUp = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-600" htmlFor="age">Age</label>
+              <label
+                className="block text-sm font-medium text-gray-600"
+                htmlFor="age"
+              >
+                Age
+              </label>
               <input
                 id="age"
                 type="number"
@@ -162,14 +204,19 @@ const SignUp = () => {
             <div className="flex items-center mt-2">
               <input type="checkbox" id="agree" className="mr-2" />
               <label htmlFor="agree" className="text-sm text-gray-600">
-                I agree to the <a href="#" className="text-blue-500 hover:underline">Terms and Privacy Policy</a>
+                I agree to the{" "}
+                <a href="#" className="text-blue-500 hover:underline">
+                  Terms and Privacy Policy
+                </a>
               </label>
             </div>
 
             <div className="mt-6">
               <button
                 type="submit"
-                className={`w-full px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 focus:outline-none ${loading && "opacity-50 cursor-not-allowed"}`}
+                className={`w-full px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 focus:outline-none ${
+                  loading && "opacity-50 cursor-not-allowed"
+                }`}
                 disabled={loading}
               >
                 {loading ? "Signing up..." : "Sign Up"}
@@ -177,7 +224,12 @@ const SignUp = () => {
             </div>
 
             <div className="mt-6 text-center">
-              <p className="text-sm text-gray-600">Already have an account? <Link to="/login" className="text-blue-500 hover:underline">Log in</Link></p>
+              <p className="text-sm text-gray-600">
+                Already have an account?{" "}
+                <Link to="/login" className="text-blue-500 hover:underline">
+                  Log in
+                </Link>
+              </p>
             </div>
 
             <div className="mt-4 text-center">

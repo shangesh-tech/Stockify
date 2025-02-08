@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 const Modal = ({ isOpen, onClose, children }) => {
-  // Prevent body scroll when modal is open
+ 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';

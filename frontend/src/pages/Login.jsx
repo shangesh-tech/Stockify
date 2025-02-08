@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import { FaFacebookF, FaGoogle, FaApple } from "react-icons/fa"; 
 import { Link, useNavigate } from "react-router-dom"; 
 import axios from "axios";
-import { toast } from "react-toastify";  // Importing react-toastify
+import { toast } from "react-toastify";  
 import img from "../assets/Login.png";
 
 const Login = () => {
-  const navigate = useNavigate();  // Use navigate for redirection
+  const navigate = useNavigate();  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // Handle form submission
+  
   const handleSubmit = async (e) => {
     e.preventDefault(); 
     setLoading(true);
@@ -69,7 +69,7 @@ const Login = () => {
                 id="password"
                 type="password"
                 className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="********"
+                placeholder="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required

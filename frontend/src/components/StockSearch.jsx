@@ -11,7 +11,7 @@ const StockSearch = () => {
   const navigate = useNavigate();
   const wrapperRef = useRef(null);
 
-  // Fetch all stocks when component mounts
+
   useEffect(() => {
     const fetchAllStocks = async () => {
       try {
@@ -28,7 +28,7 @@ const StockSearch = () => {
     fetchAllStocks();
   }, []);
 
-  // Close suggestions when clicking outside
+  
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
@@ -46,7 +46,7 @@ const StockSearch = () => {
     if (value.trim()) {
       const filtered = allStocks.filter(stock => 
         stock.symbol.toLowerCase().includes(value.toLowerCase())
-      ).slice(0, 10); // Limit to 10 suggestions
+      ).slice(0, 10); 
       setSuggestions(filtered);
       setShowSuggestions(true);
     } else {
@@ -60,7 +60,7 @@ const StockSearch = () => {
   const handleSelectStock = (symbol) => {
     setSearchTerm('');
     setShowSuggestions(false);
-    // Remove BSE: prefix for the URL
+
     const cleanSymbol = symbol.replace('BSE:', '');
     navigate(`/analysis?tvwidgetsymbol=${cleanSymbol}`);
   };

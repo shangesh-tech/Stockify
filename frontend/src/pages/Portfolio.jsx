@@ -171,7 +171,7 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* Create Portfolio Modal with Stepper */}
+      {/* Create Portfolio */}
       <Modal
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
@@ -179,7 +179,7 @@ const Portfolio = () => {
         <PortfolioStepper onClose={() => setIsCreateModalOpen(false)} />
       </Modal>
 
-      {/* Edit Portfolio Modal */}
+      {/* Edit Modal */}
       <Modal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)}>
         <EditPortfolioModal
           portfolio={selectedPortfolio}
@@ -197,7 +197,7 @@ const Portfolio = () => {
         />
       </Modal>
 
-      {/* Delete Confirmation Modal */}
+      {/* Delete Modal */}
       <Modal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
@@ -223,7 +223,7 @@ const Portfolio = () => {
         </div>
       </Modal>
 
-      {/* View Portfolio Details Modal */}
+      {/* View Portfolio  */}
       <Modal
         isOpen={!!selectedPortfolio && !isEditModalOpen && !isDeleteModalOpen}
         onClose={() => setSelectedPortfolio(null)}

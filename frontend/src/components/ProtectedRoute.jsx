@@ -16,7 +16,7 @@ const ProtectedRoute = ({ children }) => {
           setIsAuthenticated(false);
         }
       } catch (error) {
-        setIsAuthenticated(false); // If there's an error, assume the user is not authenticated
+        setIsAuthenticated(false); 
       } finally {
         setIsLoading(false);
       }
@@ -26,7 +26,7 @@ const ProtectedRoute = ({ children }) => {
   }, []);
 
   if (isLoading) {
-    return <p>Loading...</p>; // You can replace this with a spinner or any other loading component
+    return <p>Loading...</p>; 
   }
 
   if (!isAuthenticated) {

@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { MiniChart, TickerTape, Timeline } from "react-ts-tradingview-widgets";
-import { IoIosAdd } from "react-icons/io";
-import { HiTrendingUp } from "react-icons/hi";
 import { Link } from "react-router-dom"; 
 import { useSelector,useDispatch } from "react-redux";
 import {

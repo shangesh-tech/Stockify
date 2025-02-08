@@ -31,12 +31,12 @@ const PortfolioAllocationChart = ({ portfolioData }) => {
       value: allocation.small_cap_investment?.percentage || 0,
       amount: allocation.small_cap_investment?.amount || 0
     }
-  ].filter(item => item.value > 0); // Only show assets with allocations
+  ].filter(item => item.value > 0); 
 
-  // Custom colors for different asset types
+  
   const COLORS = ['#FFD700', '#0088FE', '#00C49F', '#FF8042', '#8884D8'];
 
-  // Custom tooltip to show both percentage and amount
+  
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
@@ -50,7 +50,7 @@ const PortfolioAllocationChart = ({ portfolioData }) => {
     return null;
   };
 
-  // Parse the portfolio summary
+ 
   const portfolioSummary = portfolioData?.portfolio_summary ? 
     JSON.parse(portfolioData.portfolio_summary) : null;
 

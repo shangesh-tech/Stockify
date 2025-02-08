@@ -12,8 +12,9 @@ import {
   FaQuestionCircle,
   FaBars,
   FaTimes,
+  FaLaugh 
 } from "react-icons/fa";
-import { MdMood } from "react-icons/md";
+
 import StockSearch from "./StockSearch";
 
 const Layout = ({ children }) => {
@@ -97,10 +98,10 @@ const Layout = ({ children }) => {
             <li className="flex items-center space-x-3 text-gray-900 font-semibold hover:scale-105">
               <Link
                 to="https://www.tickertape.in/market-mood-index"
-                className="flex justify-center items-center gap-1"
+                className="flex justify-center items-center gap-2"
               >
-                <MdMood size={23}/>
-                <span classname="mr-2">Fear/Greed Index</span>
+                <FaLaugh />
+                <span>Fear/Greed Index</span>
               </Link>
             </li>
             <li className="flex items-center space-x-3 text-gray-900 font-semibold hover:scale-105">

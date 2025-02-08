@@ -118,11 +118,11 @@ const Layout = ({ children }) => {
         </div>
 
         <div className="mt-6">
-          <Link to={"http://localhost:3500/api/v1/user/logout"} className="flex items-center space-x-2 text-gray-500" classname="text-red-600 hover:scale-105">
+          <Link to={"http://localhost:3500/api/v1/user/logout"} className="flex items-center space-x-2 text-red-600 hover:scale-105 font-semibold">
             <FaSignOutAlt />
             <span>Logout</span>
           </Link>
-          <button className="flex items-center space-x-2 text-gray-500 mt-3 hover:scale-105">
+          <button className="flex items-center space-x-2 text-gray-900 font-semibold mt-3 hover:scale-105">
             <FaQuestionCircle />
             <span>Help & Support</span>
           </button>

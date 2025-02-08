@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom"; 
 
 const MainSection = () => {
   return (
@@ -13,7 +14,7 @@ const MainSection = () => {
       </p>
       <div className="mt-10">
         <button className="px-8 py-3 text-white font-medium bg-black rounded-lg hover:bg-gray-800 transition duration-300">
-          Get Started
+          <Link to={"/dashboard"}>Get Started</Link>
         </button>
       </div>
     </main>

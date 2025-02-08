@@ -20,17 +20,18 @@ const PortfolioProjection = ({ portfolioData = {}, currentBalance = 0 }) => {
     return Math.round(principal * Math.pow(1 + rate, years));
   };
 
-  const calculateSIPValue = (principal, rate, years) => {
-    let totalValue = 0;
+  const calculateSIPValue = (monthlyAmount, rate, years) => {
     const monthlyRate = rate / 12;
+    const months = years * 12;
     
-    // For SIP: Monthly investment with monthly compounding
-    for (let i = 1; i <= years * 12; i++) {
-      totalValue += principal; // Monthly investment
-      totalValue *= (1 + monthlyRate); // Monthly growth
-    }
+    // Formula for SIP future value:
+    // M × (((1 + r)^n - 1) / r) × (1 + r)
+    // Where M is monthly investment, r is monthly rate, n is number of months
+    const futureValue = monthlyAmount * 
+      ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * 
+      (1 + monthlyRate);
     
-    return Math.round(totalValue);
+    return Math.round(futureValue);
   };
 
   const calculateCAGR = (initialValue, finalValue, years) => {
@@ -48,9 +49,9 @@ const PortfolioProjection = ({ portfolioData = {}, currentBalance = 0 }) => {
   };
 
   const projectionData = useMemo(() => {
-    const riskLevel = portfolioData?.portfolio_allocation?.risk || 'low';
+    const riskLevel = portfolioData?.user_info?.[0]?.risk || 'low';
     const returnRate = getRiskReturnRate(riskLevel);
-    const isLumpsum = portfolioData?.investment_type === 'lumpsum';
+    const isLumpsum = portfolioData?.investment_type?.toLowerCase() === 'lumpsum';
     const years = Array.from({ length: 21 }, (_, i) => i);
     
     return years.map(year => {
@@ -61,16 +62,16 @@ const PortfolioProjection = ({ portfolioData = {}, currentBalance = 0 }) => {
 
       // Calculate total invested amount based on investment type
       const totalInvested = isLumpsum 
-        ? currentBalance // For lumpsum, it's just the initial amount
-        : currentBalance * 12 * year; // For SIP, it's monthly amount * 12 * years
+        ? currentBalance 
+        : currentBalance * 12 * year;
 
-      // Calculate CAGR differently for SIP and Lumpsum
+      // Calculate CAGR
       const cagr = year > 0 
         ? calculateCAGR(
-            isLumpsum ? currentBalance : (currentBalance * 12), // Initial value
+            isLumpsum ? currentBalance : currentBalance * 12,
             futureValue,
             year
-          ) 
+          )
         : "0.00";
 
       return {
@@ -87,7 +88,7 @@ const PortfolioProjection = ({ portfolioData = {}, currentBalance = 0 }) => {
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
-      const isLumpsum = portfolioData?.investment_type === 'lumpsum';
+      const isLumpsum = portfolioData?.investment_type?.toLowerCase() === 'lumpsum';
       
       return (
         <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200">
@@ -110,9 +111,9 @@ const PortfolioProjection = ({ portfolioData = {}, currentBalance = 0 }) => {
   };
 
   const milestoneYears = [5, 10, 15, 20];
-  const riskLevel = portfolioData?.portfolio_allocation?.risk || 'low';
+  const riskLevel = portfolioData?.user_info?.[0]?.risk || 'low';
   const returnRate = getRiskReturnRate(riskLevel);
-  const isLumpsum = portfolioData?.investment_type === 'lumpsum';
+  const isLumpsum = portfolioData?.investment_type?.toLowerCase() === 'lumpsum';
 
   return (
     <div className="space-y-6">

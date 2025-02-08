@@ -71,6 +71,12 @@ Stockify simplifies investing by leveraging AI to provide personalized portfolio
 
 ----------
 
+## **Youtube**
+
+ https://youtu.be/3iyBqgTVw6k
+
+----------
+
 ## **License**
 
 This project is licensed under the **MIT License**. See [LICENSE](https://github.com/shangesh-tech/Stockify/blob/main/LICENSE) for details.

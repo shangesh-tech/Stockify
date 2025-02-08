@@ -119,7 +119,7 @@ const PortfolioStepper = ({ onClose }) => {
                 </div>
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
                   <dt className="font-medium mb-1 sm:mb-0">Investment Amount:</dt>
-                  <dd className="text-gray-600">${formData.amount}</dd>
+                  <dd className="text-gray-600">₹{formData.amount}</dd>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
                   <dt className="font-medium mb-1 sm:mb-0">Investment Type:</dt>

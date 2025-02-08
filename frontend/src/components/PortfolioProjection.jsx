@@ -74,7 +74,7 @@ const PortfolioProjection = ({ portfolioData, currentBalance }) => {
 
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={projectionData}>
+          <LineChart data={projectionData} classname="gap-6">
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis 
               dataKey="year"
@@ -90,6 +90,7 @@ const PortfolioProjection = ({ portfolioData, currentBalance }) => {
               type="monotone"
               dataKey="value"
               stroke="#2563eb"
+              name="Portfolio Value"
               strokeWidth={2}
               dot={false}
               activeDot={{ r: 8 }}

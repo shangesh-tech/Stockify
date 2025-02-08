@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const PortfolioProjection = ({ portfolioData, currentBalance }) => {
+const PortfolioProjection = ({ portfolioData = {}, currentBalance = 0 }) => {
   const getRiskReturnRate = (risk) => {
-    switch (risk.toLowerCase()) {
+    switch (risk?.toLowerCase()) {
       case 'low':
         return 0.11;
       case 'conservative':
@@ -31,7 +31,17 @@ const PortfolioProjection = ({ portfolioData, currentBalance }) => {
   };
 
   const calculateCAGR = (initialValue, finalValue, years) => {
+    if (!initialValue || !finalValue || !years) return "0.00";
     return ((Math.pow(finalValue / initialValue, 1 / years) - 1) * 100).toFixed(2);
+  };
+
+  const formatCurrency = (value) => {
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(value || 0);
   };
 
   const projectionData = useMemo(() => {
@@ -50,25 +60,15 @@ const PortfolioProjection = ({ portfolioData, currentBalance }) => {
         ? currentBalance 
         : currentBalance + (monthlyContribution * 12 * year);
 
-      const cagr = year > 0 ? calculateCAGR(currentBalance, futureValue, year) : 0;
+      const cagr = year > 0 ? calculateCAGR(currentBalance, futureValue, year) : "0.00";
 
       return {
         year,
         value: futureValue,
         totalInvested,
         cagr,
-        formatted: new Intl.NumberFormat('en-US', {
-          style: 'currency',
-          currency: 'INR',
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0,
-        }).format(futureValue),
-        formattedInvested: new Intl.NumberFormat('en-US', {
-          style: 'currency',
-          currency: 'INR',
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0,
-        }).format(totalInvested)
+        formatted: formatCurrency(futureValue),
+        formattedInvested: formatCurrency(totalInvested)
       };
     });
   }, [currentBalance, portfolioData]);
@@ -79,7 +79,7 @@ const PortfolioProjection = ({ portfolioData, currentBalance }) => {
       return (
         <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200">
           <p className="font-semibold text-gray-800">Year {label}</p>
-          <p className="text-gray-600">Initial Amount: ₹{currentBalance.toLocaleString()}</p>
+          <p className="text-gray-600">Initial Amount: {formatCurrency(currentBalance)}</p>
           <p className="text-gray-600">Total Invested: {data.formattedInvested}</p>
           <p className="text-gray-600">Portfolio Value: {data.formatted}</p>
           <p className="text-gray-600">CAGR: {data.cagr}%</p>
@@ -93,6 +93,7 @@ const PortfolioProjection = ({ portfolioData, currentBalance }) => {
   const riskLevel = portfolioData?.portfolio_allocation?.risk || 'low';
   const returnRate = getRiskReturnRate(riskLevel);
   const isLumpsum = portfolioData?.investment_type === 'lumpsum';
+  const monthlyContribution = portfolioData?.portfolio_allocation?.monthly_contribution || 0;
 
   return (
     <div className="space-y-6">
@@ -100,10 +101,10 @@ const PortfolioProjection = ({ portfolioData, currentBalance }) => {
         <div>
           <h3 className="text-lg font-semibold mb-2">Investment Summary</h3>
           <p className="text-gray-600">Investment Type: {isLumpsum ? 'Lumpsum' : 'SIP'}</p>
-          <p className="text-gray-600">Initial Amount: ₹{currentBalance.toLocaleString()}</p>
+          <p className="text-gray-600">Initial Amount: {formatCurrency(currentBalance)}</p>
           {!isLumpsum && (
             <p className="text-gray-600">
-              Monthly SIP: ₹{portfolioData?.portfolio_allocation?.monthly_contribution.toLocaleString()}
+              Monthly SIP: {formatCurrency(monthlyContribution)}
             </p>
           )}
           <p className="text-gray-600">
@@ -158,7 +159,7 @@ const PortfolioProjection = ({ portfolioData, currentBalance }) => {
             >
               <p className="text-sm text-gray-600 font-medium">After {year} years</p>
               <div className="space-y-2">
-                <p className="text-sm text-gray-600">Initial: ₹{currentBalance.toLocaleString()}</p>
+                <p className="text-sm text-gray-600">Initial: {formatCurrency(currentBalance)}</p>
                 <p className="text-sm text-gray-600">Total Invested: {projection.formattedInvested}</p>
                 <p className="text-sm text-gray-600">→</p>
                 <p className="text-lg font-semibold text-gray-900">{projection.formatted}</p>

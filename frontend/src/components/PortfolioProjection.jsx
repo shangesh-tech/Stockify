@@ -1,23 +1,21 @@
 import React, { useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Card } from '@/components/ui/card';
 
 const PortfolioProjection = ({ portfolioData, currentBalance }) => {
   const getRiskReturnRate = (risk) => {
     switch (risk.toLowerCase()) {
       case 'low':
-        return 0.11; // 11% average return
+        return 0.11;
       case 'conservative':
-        return 0.135; // 13.5% average return
+        return 0.135;
       case 'high':
-        return 0.165; // 16.5% average return
+        return 0.165;
       default:
         return 0.11;
     }
   };
 
   const calculateLumpsumValue = (principal, rate, years) => {
-    // Simple compound interest formula: A = P(1 + r)^t
     return Math.round(principal * Math.pow(1 + rate, years));
   };
 
@@ -25,7 +23,6 @@ const PortfolioProjection = ({ portfolioData, currentBalance }) => {
     let totalValue = principal;
     const monthlyRate = rate / 12;
     
-    // Calculate monthly compounding with SIP
     for (let i = 1; i <= years * 12; i++) {
       totalValue = (totalValue * (1 + monthlyRate)) + monthlyContribution;
     }
@@ -42,7 +39,7 @@ const PortfolioProjection = ({ portfolioData, currentBalance }) => {
     const returnRate = getRiskReturnRate(riskLevel);
     const isLumpsum = portfolioData?.investment_type === 'lumpsum';
     const monthlyContribution = portfolioData?.portfolio_allocation?.monthly_contribution || 0;
-    const years = Array.from({ length: 21 }, (_, i) => i); // 0 to 20 years
+    const years = Array.from({ length: 21 }, (_, i) => i);
     
     return years.map(year => {
       const futureValue = isLumpsum 
@@ -99,7 +96,7 @@ const PortfolioProjection = ({ portfolioData, currentBalance }) => {
 
   return (
     <div className="space-y-6">
-      <Card className="p-6">
+      <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
         <div>
           <h3 className="text-lg font-semibold mb-2">Investment Summary</h3>
           <p className="text-gray-600">Investment Type: {isLumpsum ? 'Lumpsum' : 'SIP'}</p>
@@ -113,9 +110,9 @@ const PortfolioProjection = ({ portfolioData, currentBalance }) => {
             Expected Return: {(returnRate * 100).toFixed(1)}% ({riskLevel} risk)
           </p>
         </div>
-      </Card>
+      </div>
 
-      <div className="h-80">
+      <div className="h-80 bg-white p-4 rounded-lg shadow-md border border-gray-200">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={projectionData}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -155,14 +152,19 @@ const PortfolioProjection = ({ portfolioData, currentBalance }) => {
         {milestoneYears.map(year => {
           const projection = projectionData[year];
           return (
-            <Card key={year} className="p-4">
+            <div 
+              key={year} 
+              className="bg-white p-4 rounded-lg shadow-md border border-gray-200"
+            >
               <p className="text-sm text-gray-600 font-medium">After {year} years</p>
               <div className="space-y-2">
+                <p className="text-sm text-gray-600">Initial: ₹{currentBalance.toLocaleString()}</p>
                 <p className="text-sm text-gray-600">Total Invested: {projection.formattedInvested}</p>
+                <p className="text-sm text-gray-600">→</p>
                 <p className="text-lg font-semibold text-gray-900">{projection.formatted}</p>
                 <p className="text-sm text-gray-600">CAGR: {projection.cagr}%</p>
               </div>
-            </Card>
+            </div>
           );
         })}
       </div>

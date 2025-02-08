@@ -99,7 +99,7 @@ const Layout = ({ children }) => {
                 to="https://www.tickertape.in/market-mood-index"
                 className="flex justify-center items-center gap-2"
               >
-                <MdMood />
+                <MdMood size={30}/>
                 <span>Fear/Greed Index</span>
               </Link>
             </li>

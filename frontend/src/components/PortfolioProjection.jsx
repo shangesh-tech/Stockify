@@ -74,11 +74,11 @@ const PortfolioProjection = ({ portfolioData, currentBalance }) => {
 
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={projectionData} classname="gap-6">
+          <LineChart data={projectionData}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis 
               dataKey="year"
-              label={{ value: 'Years', position: 'bottom' }}
+              
             />
             <YAxis 
               tickFormatter={(value) => `${(value / 1000)}K`}
@@ -90,7 +90,7 @@ const PortfolioProjection = ({ portfolioData, currentBalance }) => {
               type="monotone"
               dataKey="value"
               stroke="#2563eb"
-              name="Portfolio Value"
+              name="Portfolio Year"
               strokeWidth={2}
               dot={false}
               activeDot={{ r: 8 }}

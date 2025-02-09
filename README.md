@@ -67,6 +67,7 @@ Stockify simplifies investing by leveraging AI to provide personalized portfolio
 ---
 ## **Python AI-Server**
 1. [Python-fastapi](https://github.com/shangesh-tech/Stockify-fastapi.git)
+2. [Finance-Analyzer](https://github.com/shangesh-tech/Finance-Analyzer.git)
 
 ----------
 

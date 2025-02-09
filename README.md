@@ -60,7 +60,7 @@ Stockify simplifies investing by leveraging AI to provide personalized portfolio
 |-------------------|------------------------------------------------------------------------------|
 | **Frontend**      | React.js, Tailwindcss                                          |
 | **Backend**       | Node.js, Express.js, FastAPI, Python                                         |
-| **Database**      | MongoDB                                                                      |
+| **Database**      | MongoDB , VectorStore (Faiss)                                                                  |
 | **Gen AI**         | LangChain,LlamaIndex, Gemini 1.5 Pro, llama 3.3-8b  (Groq LPU)|
 | **APIs**          | YahooFinance  , TradingView |                                                                                                
 

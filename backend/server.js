@@ -4,33 +4,40 @@ const mongoose = require("mongoose");
 const app = express();
 const userRoutes = require("./routes/userRoute");
 const PortfolioRoutes = require("./routes/portfolioRoutes");
-const cors = require('cors');
-const cookieParser = require('cookie-parser');
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
-//Middleware
+// Middleware
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === "development") {
   app.use((req, res, next) => {
     console.log("path " + req.path + " method " + req.method);
     next();
   });
 }
 
-app.use(cors({
-  origin: 'https://stockify-pink.vercel.app',
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: "https://stockify-pink.vercel.app",
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(cookieParser());
 
 // Routes Middleware
-app.use('/api/v1/user', userRoutes);
-app.use('/api/v1/portfolio', PortfolioRoutes);
+app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/portfolio", PortfolioRoutes);
 
+// Root Route
+app.get("/", (req, res) => {
+  res.send("Hello World! Server is running.");
+});
 
 // DB connection
-mongoose.connect(process.env.MONGO_URI)
+mongoose
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("Connected to database!");
     app.listen(process.env.PORT, () => {
@@ -39,4 +46,5 @@ mongoose.connect(process.env.MONGO_URI)
   })
   .catch((error) => {
     console.log("Connection failed!", error);
+    
   });
